@@ -9,7 +9,7 @@ use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
 
 class TradePaymentsServiceProvider extends LaravelServiceProvider {
-    protected $defer = true;// Delay initializing this service for good performance
+    protected $defer = false;// Delay initializing this service for good performance
     public function provides() {
         return [];
     }
