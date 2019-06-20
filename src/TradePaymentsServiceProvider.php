@@ -9,13 +9,13 @@ use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
 
 class TradePaymentsServiceProvider extends LaravelServiceProvider {
-    protected $defer = false;// Delay initializing this service for good performance
-    public function provides() {
-        return [];
-    }
+    // protected $defer = false;// Delay initializing this service for good performance
+    // public function provides() {
+    //     return [];
+    // }
     public function boot() {
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'trade-payments');
-        
+
         $this->publishes([
             __DIR__.'/../config/trade-payments.php' => config_path('trade-payments.php'),
         ]);
