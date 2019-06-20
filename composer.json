@@ -1,0 +1,48 @@
+{
+    "name": "vsb-laravel/trade-payments",
+    "type":"composer-plugin-laravel",
+    "description": "Laravel trade-payments model",
+    "keywords": ["trade-payments", "laravel", "vsb"],
+    "homepage": "https://github.com/vsb-laravel/trade-payments",
+    "support": {
+        "issues": "https://github.com/vsb-laravel/trade-payments/issues",
+        "source": "https://github.com/vsb-laravel/trade-payments"
+    },
+    "authors": [
+        {
+            "name": "Vladimir Bushuev",
+            "email": "v.bushuev@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1"
+    },
+    "require-dev": {
+        "laravel/framework": "5.8.x"
+    },
+    "autoload": {
+        "psr-4": {
+            "Vsb\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "files": [
+            "tests/fake.php"
+        ],
+        "psr-4": {
+            "Vsb\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "branch-alias": {
+            "dev-master": "master"
+        },
+        "laravel": {
+            "providers": [
+                "Vsb\\TradePaymentsServiceProvider"
+            ]
+        }
+    }
+}
