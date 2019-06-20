@@ -14,8 +14,8 @@ class TradePaymentsServiceProvider extends LaravelServiceProvider {
         return [];
     }
     public function boot() {
-        $this->registerEvents();
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'trade-payments');
+        
         $this->publishes([
             __DIR__.'/../config/trade-payments.php' => config_path('trade-payments.php'),
         ]);
@@ -25,19 +25,11 @@ class TradePaymentsServiceProvider extends LaravelServiceProvider {
     }
     public function register() {
         $this->mergeConfigFrom(__DIR__.'/../config/trade-payments.php', 'trade-payments');
-        $this->registerServices();
-    }
-
-    public function registerEvents(){
-        // $events = $this->app->make(Dispatcher::class);
-        // $events->listen($event, $listener);
-    }
-    public function registerServices(){
         $this->app->singleton('vsb.payments', function ($app) {
-            return new PaymentManager($app);
+            return new PaymentManager();
         });
     }
-    public function checkDepends(){
+    protected function checkDepends(){
         $classes = [
             '\App\Account',
             '\App\Merchant',
