@@ -16,6 +16,12 @@ class TradePaymentsServiceProvider extends LaravelServiceProvider {
     public function boot() {
         $this->registerEvents();
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'trade-payments');
+        $this->publishes([
+            __DIR__.'/../config/trade-payments.php' => config_path('trade-payments.php'),
+        ]);
+        $this->publishes([
+            __DIR__.'/../resources/lang' => resource_path('lang/vendor/trade-payments'),
+        ]);
     }
     public function registerEvents(){
         // $events = $this->app->make(Dispatcher::class);
