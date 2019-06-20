@@ -2,9 +2,9 @@
 
 use Vsb\Facades\PaymentManager;
 
-use Illuminate\Queue\QueueManager;
-use Illuminate\Contracts\Events\Dispatcher;
-use Illuminate\Support\Facades\Route;
+// use Illuminate\Queue\QueueManager;
+// use Illuminate\Contracts\Events\Dispatcher;
+// use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
 
@@ -23,13 +23,14 @@ class TradePaymentsServiceProvider extends LaravelServiceProvider {
             __DIR__.'/../resources/lang' => resource_path('lang/vendor/trade-payments'),
         ]);
     }
-    public function registerEvents(){
-        // $events = $this->app->make(Dispatcher::class);
-        // $events->listen($event, $listener);
-    }
     public function register() {
         $this->mergeConfigFrom(__DIR__.'/../config/trade-payments.php', 'trade-payments');
         $this->registerServices();
+    }
+
+    public function registerEvents(){
+        // $events = $this->app->make(Dispatcher::class);
+        // $events->listen($event, $listener);
     }
     public function registerServices(){
         $this->app->singleton('vsb.payments', function ($app) {
