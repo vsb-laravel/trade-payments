@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Facade;
 
 class PaymentManager extends Facade{
-
     public function createTransaction($args=false){
         if(!isset($args['user']) && !($args['user'] instanceof \App\User)) throw new \Exception(trans('trade-payments::depends.no_user'));
         list($res,$amount)=[["error"=>"404","message"=>"Deposit failed."],abs(floatval($args['amount']))];
@@ -21,7 +20,7 @@ class PaymentManager extends Facade{
         $merchant = $args['merchant'];
         $type = $args['type'];
         $user = $args['user'];
-        $uid = isset($args['uid'])?$args['uid']:('trx'.time().$account.$user->id;
+        $uid = isset($args['uid'])?$args['uid']:('trx'.time().$account.$user->id);
         if(!is_null(Transaction::where('uid',$uid)->first())) return null;
         $trx = Transaction::create([
                 'type'=>$type,
@@ -35,9 +34,6 @@ class PaymentManager extends Facade{
         return $trx;
     }
     public function makeBalance($account,$amount,$type,$merchant=null,$event=true){
-        if(!isset($args['user']) && !($args['user'] instanceof \App\User)) throw new \Exception(trans('trade-payments::depends.no_user'));
-        if($account instanceof \App\Account)) throw new \Exception(trans('trade-payments::depends.no_account'));
-
         $account->amount=(in_array($type,['deposit','debit','transfer_debit','rollback','return']))?$account->amount+abs($amount):$account->amount-abs($amount);
         if($account->amount<0)throw new \Exception(trans('trade-payments::messages.not_enough_balance'),1);
         if( $type === 'deposit' )$account->user()->update(['deposited'=>1]);
@@ -80,9 +76,9 @@ class PaymentManager extends Facade{
                 "message"=>$e->getMessage(),
                 "trace"=>$e->getTrace()
             ]));
-            Log::error('makeTransaction error: '.json_encode($res));
+            return $res;
         }
-        return $res;
+
     }
     public function rollback($args=false){
         $type = $args['type'];
